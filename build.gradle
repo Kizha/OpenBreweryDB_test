@@ -1,0 +1,41 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group 'OpenBreweryDB_test'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    compile group: 'org.springframework', name: 'spring-test', version: '5.2.19.RELEASE'
+    compile group: 'org.springframework', name: 'spring-context', version: '5.2.19.RELEASE'
+    compile group: 'io.rest-assured', name: 'rest-assured', version: '4.4.0'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.5'
+    compile group: 'junit', name: 'junit', version: '4.13.2'
+    compile group: 'org.assertj', name: 'assertj-core', version: '3.22.0'
+    compile group: 'org.reflections', name: 'reflections', version: '0.10.2'
+    testCompile group: 'pl.pragmatists', name: 'JUnitParams', version: '1.1.1'
+
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.22'
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.22'
+
+    testCompileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.22'
+    testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.22'
+}
+
+test {
+    exclude '**/*'
+}
+
+task regressionTests(type: Test) {
+    classpath = sourceSets.test.runtimeClasspath
+}
+
+wrapper {
+    gradleVersion = '7.3.3'
+}
