@@ -3,7 +3,6 @@ package com.parimatch.tech.service.api;
 import com.parimatch.tech.common.Request;
 import com.parimatch.tech.common.Response;
 
-import com.parimatch.tech.pojo.BreweryView;
 import io.restassured.http.ContentType;
 import io.restassured.http.Method;
 import java.util.List;

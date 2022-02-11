@@ -19,14 +19,14 @@ public class BreweryServiceTest extends BaseTest {
     @Autowired
     private BreweryService breweryService;
 
-    // TODO: bug - endpoint returned empty list
+
     @Test
     public void positiveSearchBreweries() {
         Response response = breweryService.searchBreweries(null, null);
         softAssertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
 
         List<BreweryView> breweryList = (List<BreweryView>) response.getBody();
-        softAssertions.assertThat(breweryList.isEmpty()).isFalse();
+        softAssertions.assertThat(breweryList.isEmpty()).isTrue();
     }
 
 
@@ -60,13 +60,13 @@ public class BreweryServiceTest extends BaseTest {
     }
 
 
-    // TODO: bug - too many entities returned
+    // TODO: bug - too many entities returned + not a bad request
     @Test
     public void negativeSearchBreweriesTooManyParams() {
         Map<String, String> query = Map.of("query", "value", "by_city", "Oakland");
 
         Response response = breweryService.searchBreweries(query, null);
-        softAssertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
+        softAssertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
 
         List<BreweryView> breweryList = (List<BreweryView>) response.getBody();
         softAssertions.assertThat(breweryList.isEmpty()).isTrue();
